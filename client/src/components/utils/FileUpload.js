@@ -1,19 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { Icon } from 'antd';
+import Axios from 'axios';
 
-function FileUpload() {
+function FileUpload(props) {
+  const [Images, setImages] = useState([]);
+
+  const onDrop = files => {
+    let formData = new FormData();
+    const config = {
+      header: { 'content-type': 'multipart/form-data' }
+    };
+    formData.append('file', files[0]);
+
+    Axios.post('/api/product/uploadImage', formData, config).then(response => {
+      if (response.data.success) {
+        setImages([...Images, response.data.image]);
+        props.refreshFunction([...Images, response.data.image]);
+      } else {
+        alert('Failed to save image in server');
+      }
+    });
+
+    // save the image we choose inside the node server
+  };
+
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Dropzone onDrop multiple maxSize>
+      <Dropzone onDrop={onDrop} multiple={false} maxSize={80000000000}>
         {({ getRootProps, getInputProps }) => (
           <div
             style={{
               width: '300px',
               height: '240px',
-              border: '1px solid black',
+              border: '1px solid lightblue',
               display: 'flex',
-              alignItems: 'center'
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
             {...getRootProps()}
           >
@@ -22,6 +45,19 @@ function FileUpload() {
           </div>
         )}
       </Dropzone>
+
+      <div
+        style={{
+          display: 'flex',
+          width: '350px',
+          height: '240px',
+          overflowX: 'scroll'
+        }}
+      >
+        <div onClick>
+          <img />
+        </div>
+      </div>
     </div>
   );
 }
