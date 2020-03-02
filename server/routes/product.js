@@ -4,23 +4,16 @@ const { auth } = require('../middleware/auth');
 const multer = require('multer');
 
 var storage = multer.diskStorage({
-  // where we want to save the image or video file
-  // save to uploads
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
   },
-  //   how the file will be named and dated
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}_${file.originalname}`);
   },
-  //   if the file is not a jpg or png then the message will show up
   fileFilter: (req, file, cb) => {
-    const ext = path.extreme(file.originalname);
-    if (ext !== '.jpg' || ext !== '.png' || ext !== '.mp4') {
-      return cb(
-        res.status(400).end('only jpeg, mp4 and png are allowed'),
-        false
-      );
+    const ext = path.extname(file.originalname);
+    if (ext !== '.jpg' || ext !== '.png') {
+      return cb(res.status(400).end('only jpg, png are allowed'), false);
     }
     cb(null, true);
   }
