@@ -34,7 +34,7 @@ function FileUpload(props) {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Dropzone onDrop={onDrop} multiple={false} maxSize={800000000}>
+      <Dropzone onDrop={onDrop} multiple={false} maxSize={80000000}>
         {({ getRootProps, getInputProps }) => (
           <div
             style={{
