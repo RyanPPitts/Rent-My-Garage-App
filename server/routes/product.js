@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
 const multer = require('multer');
 
@@ -37,7 +36,9 @@ router.post('/uploadImage', auth, (req, res) => {
   //after getting image from user
   // we need to save it within server
   upload(req, res, err => {
-    if (err) return res.json({ success: false, err });
+    if (err) {
+      return res.json({ success: false, err });
+    }
     return res.json({
       success: true,
       image: res.req.file.path,
