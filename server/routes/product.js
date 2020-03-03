@@ -23,7 +23,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('file');
 
 //=================================
-//             Product
+//             Product information
 //=================================
 
 router.post('/uploadImage', auth, (req, res) => {
@@ -48,6 +48,13 @@ router.post('/uploadProduct', auth, (req, res) => {
   product.save(err => {
     if (err) return res.status(400).json({ success: false, err });
     return res.status(200).json({ success: true });
+  });
+});
+
+router.post('/getProducts', auth, (req, res) => {
+  Product.find().exec((err, products) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, products });
   });
 });
 

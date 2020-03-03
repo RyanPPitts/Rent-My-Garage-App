@@ -1,16 +1,77 @@
-import React from 'react'
-import { FaCode } from "react-icons/fa";
+import React, { useEffect, useState } from 'react';
+import { FaCode, FaCreditCard } from 'react-icons/fa';
+import Axios from 'axios';
+import { Icon, Col, Card, Meta } from 'antd';
 
 function LandingPage() {
-    return (
-        <>
-        <div className="app">
-            <FaCode style={{ fontSize: '4rem' }} /><br />
-            <span style={{ fontSize: '2rem' }}>Let's Start Coding!</span>
+  const [Products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // get information from the MongoDB for the landing page
+    Axios.post('/api/product/getProducts').then(response => {
+      if (response.data.success) {
+        setProducts(response.data.products);
+
+        console.log(response.data.products);
+      } else {
+        alert('Failed to get product information');
+      }
+    });
+  }, []);
+
+  const renderCards = {Products.map((product, index) => {
+      return <Col lg={6} md={8} xs={24}>
+        <Card 
+        hoverable={true}
+        cover
+        >
+
+        <Meta 
+        title
+        description
+        />
+        
+        </Card>
+      </Col>
+  })
+
+
+  return (
+    <div style={{ width: '80%', margin: '3rem auto' }}>
+      <div style={{ textAlign: 'center' }}>
+        <h2>Lets Buy some cool bars</h2>
+      </div>
+
+      {/* filter */}
+
+      {/* search */}
+
+      {Products.length === 0 ? (
+        <div
+          style={{
+            display: 'flex',
+            height: '300px',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <h2> No cars listing yet</h2>
         </div>
-        <div style={{ float:'right' }}>Thanks For Using This Boiler Plate by John Ahn</div>
-        </>
-    )
+      ) : (
+        <div>
+            <Row gutter={[16, 16]}>
+                    {renderCards}
+                })
+            </Row>
+        </div>
+      )}
+      <br />
+      <br />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <button>Load More</button>
+      </div>
+    </div>
+  );
 }
 
-export default LandingPage
+export default LandingPage;
