@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { Product } = require('../models/Product');
 const { auth } = require('../middleware/auth');
 const multer = require('multer');
 
@@ -12,7 +13,7 @@ var storage = multer.diskStorage({
   },
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    if (ext !== '.jpeg' || ext !== '.png') {
+    if (ext !== '.jpg' || ext !== '.png') {
       return cb(res.status(400).end('only jpeg, png are allowed'), false);
     }
     cb(null, true);
@@ -37,6 +38,16 @@ router.post('/uploadImage', auth, (req, res) => {
       image: res.req.file.path,
       fileName: res.req.file.filename
     });
+  });
+});
+
+router.post('/uploadProduct', auth, (req, res) => {
+  //save all the data we got from the user to the Mongo DB
+  // req.body has all the data from the front end.
+  const product = new Product(req.body);
+  product.save(err => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res.status(200).json({ success: true });
   });
 });
 
