@@ -42,18 +42,19 @@ function UploadProductPage(props) {
     setImages(newImages);
   };
 
-  if (
-    !TitleValue ||
-    !DescriptionValue ||
-    !PriceValue ||
-    !LocationValue ||
-    !Images
-  ) {
-    return alert('fill all the fields before submitting');
-  }
-
   const onSubmit = event => {
     event.preventDefault();
+
+    if (
+      !TitleValue ||
+      !DescriptionValue ||
+      !PriceValue ||
+      !LocationValue ||
+      !Images
+    ) {
+      return alert('fill all the fields before submitting');
+    }
+
     const variables = {
       writer: props.user.userData._id,
       title: TitleValue,
