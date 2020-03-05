@@ -10,6 +10,9 @@ function LandingPage() {
   const [Products, setProducts] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
+  const [PostSize, setPostSize] = useState(0);
+
+  // When more than 8 posts shows show load more button.  Less than 8 items no load more button.
 
   useEffect(() => {
     // get information from the MongoDB for the landing page
@@ -25,7 +28,7 @@ function LandingPage() {
       if (response.data.success) {
         //   spread operator to bring in the first 8 plus the next 8 products
         setProducts([...Products, response.data.products]);
-
+        setPostSize(response.data.postSize);
         console.log(response.data.products);
       } else {
         alert('Failed to get product information');
@@ -71,7 +74,7 @@ function LandingPage() {
             alignItems: 'center'
           }}
         >
-          <h2> No cars listing yet</h2>
+          <h2> No cars listed yet</h2>
         </div>
       ) : (
         <div>
@@ -83,9 +86,12 @@ function LandingPage() {
       )}
       <br />
       <br />
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <button onClick={onLoadMore}>Load More</button>
-      </div>
+
+      {PostSize >= Limit && (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <button onClick={onLoadMore}>Load More</button>
+        </div>
+      )}
     </div>
   );
 }
