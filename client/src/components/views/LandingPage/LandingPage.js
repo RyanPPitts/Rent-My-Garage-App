@@ -43,6 +43,7 @@ function LandingPage() {
       limit: Limit
     };
     getProducts(variables);
+    setSkip(skip);
   };
 
   const renderCards = Products.map((product, index) => {
