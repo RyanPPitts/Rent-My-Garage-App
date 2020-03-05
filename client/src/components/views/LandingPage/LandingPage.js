@@ -8,10 +8,20 @@ const { Meta } = Card;
 
 function LandingPage() {
   const [Products, setProducts] = useState([]);
+  const [Skip, setSkip] = useState(0);
+  const [Limit, setLimit] = useState(8);
 
   useEffect(() => {
     // get information from the MongoDB for the landing page
-    Axios.post('/api/product/getProducts').then(response => {
+    const variables = {
+      skip: Skip,
+      limit: Limit
+    };
+    getProducts(variables);
+  }, []);
+
+  const getProducts = variables => {
+    Axios.post('/api/product/getProducts', variables).then(response => {
       if (response.data.success) {
         setProducts(response.data.products);
 
@@ -20,7 +30,16 @@ function LandingPage() {
         alert('Failed to get product information');
       }
     });
-  }, []);
+  };
+
+  const onLoadMore = () => {
+    let skip = Skip + Limit;
+    const variables = {
+      skip: skip,
+      limit: Limit
+    };
+    getProducts(variables);
+  };
 
   const renderCards = Products.map((product, index) => {
     return (
@@ -64,7 +83,7 @@ function LandingPage() {
       <br />
       <br />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <button>Load More</button>
+        <button onClick={onLoadMore}>Load More</button>
       </div>
     </div>
   );
