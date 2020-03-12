@@ -3,6 +3,7 @@ import { FaCode, FaCreditCard } from 'react-icons/fa';
 import Axios from 'axios';
 import ImageSlider from '../../utils/ImageSlider';
 import { Icon, Col, Card, Row } from 'antd';
+import CheckBox from './Sections/CheckBox';
 
 const { Meta } = Card;
 
@@ -63,6 +64,7 @@ function LandingPage() {
       </div>
 
       {/* filter */}
+      <CheckBox />
 
       {/* search */}
 
