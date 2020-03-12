@@ -32,7 +32,7 @@ function CheckBox() {
       <Panel header key='1'>
         {locations.map((value, index) => (
           <React.Fragment key={index}>
-            <CheckBox
+            <Checkbox
             onChange
             type="checkbox"
             checked
