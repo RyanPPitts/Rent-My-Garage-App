@@ -12,6 +12,10 @@ function LandingPage() {
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
   const [PostSize, setPostSize] = useState(0);
+  const [Filters, setFilters] = useState({
+    locations: [],
+    price: []
+  });
 
   // When more than 8 posts shows show load more button.  Less than 8 items no load more button.
 
@@ -57,6 +61,27 @@ function LandingPage() {
     );
   });
 
+  const showFilteredResults = filters => {
+    const variables = {
+      skip: 0,
+      limit: Limit,
+      filters: filters
+    };
+
+    getProducts(variables);
+    setSkip(0);
+  };
+
+  const handleFilters = (filters, category) => {
+    console.log(filters);
+    const newFilters = { ...Filters };
+    newFilters[category] = filters;
+    if (category == 'price') {
+    }
+    showFilteredResults(newFilters);
+    setFilters(newFilters);
+  };
+
   return (
     <div style={{ width: '80%', margin: '3rem auto' }}>
       <div style={{ textAlign: 'center' }}>
@@ -64,7 +89,9 @@ function LandingPage() {
       </div>
 
       {/* filter */}
-      <CheckBox />
+      <CheckBox
+        handleFilters={filters => handleFilters(filters, 'locations')}
+      />
 
       {/* search */}
 
