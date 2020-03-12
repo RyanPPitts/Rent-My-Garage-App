@@ -1,4 +1,3 @@
-# Rent My Garage App
+# Japanese Classic Cars
 
-RMG App
-Adding information to test push
+Ecommerce website that allows a local user to buy an imported Japanese classic super car.
