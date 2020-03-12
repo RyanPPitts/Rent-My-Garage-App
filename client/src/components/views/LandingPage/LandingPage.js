@@ -11,6 +11,7 @@ import { locations, price } from './Sections/Datas';
 const { Meta } = Card;
 
 function LandingPage() {
+  // state of the component
   const [Products, setProducts] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
@@ -119,6 +120,18 @@ function LandingPage() {
 
   const updateSearchTerms = newSearchTerm => {
     setSearchTerms(newSearchTerm);
+    console.log(newSearchTerm);
+
+    const variables = {
+      skip: 0,
+      limit: Limit,
+      filters: Filters,
+      searchTerm: newSearchTerm
+    };
+
+    setSkip(0);
+    setSearchTerms(newSearchTerm);
+    getProducts(variables);
   };
 
   return (
