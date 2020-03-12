@@ -5,6 +5,7 @@ import ImageSlider from '../../utils/ImageSlider';
 import { Icon, Col, Card, Row } from 'antd';
 import CheckBox from './Sections/CheckBox';
 import RadioBox from './Sections/RadioBox';
+import SearchFeature from './Sections/SearchFeature';
 import { locations, price } from './Sections/Datas';
 
 const { Meta } = Card;
@@ -13,6 +14,7 @@ function LandingPage() {
   const [Products, setProducts] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
+  const [SearchTerms, setSearchTerms] = useState('');
   const [PostSize, setPostSize] = useState(0);
   const [Filters, setFilters] = useState({
     locations: [],
@@ -109,9 +111,14 @@ function LandingPage() {
 
     if (category == 'price') {
       let priceValues = handlePrice(filters);
+      newFilters[category] = priceValues;
     }
     showFilteredResults(newFilters);
     setFilters(newFilters);
+  };
+
+  const updateSearchTerms = newSearchTerm => {
+    setSearchTerms(newSearchTerm);
   };
 
   return (
@@ -138,6 +145,15 @@ function LandingPage() {
       </Row>
 
       {/* search */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          margin: '1rem auto'
+        }}
+      >
+        <SearchFeature refreshFunction={updateSearchTerms} />
+      </div>
 
       {Products.length === 0 ? (
         <div
