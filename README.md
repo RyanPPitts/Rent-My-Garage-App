@@ -1,3 +1,3 @@
-# Japanese Classic Cars
+# Japanese Classic Cars Ecommerce Site
 
-Ecommerce website that allows a local user to buy an imported Japanese classic super car.
+E-commerce website that allows a local user to buy an imported Japanese classic super car.
