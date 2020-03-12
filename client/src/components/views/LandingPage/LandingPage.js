@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { FaCode, FaCreditCard } from 'react-icons/fa';
+// import { FaCode, FaCreditCard } from 'react-icons/fa';
 import Axios from 'axios';
+import { Col, Card, Row } from 'antd';
+
 import ImageSlider from '../../utils/ImageSlider';
-import { Icon, Col, Card, Row } from 'antd';
 import CheckBox from './Sections/CheckBox';
 import RadioBox from './Sections/RadioBox';
 import SearchFeature from './Sections/SearchFeature';
