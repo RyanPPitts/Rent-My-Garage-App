@@ -31,8 +31,13 @@ function LandingPage() {
   const getProducts = variables => {
     Axios.post('/api/product/getProducts', variables).then(response => {
       if (response.data.success) {
+        if (variables.loadMore) {
+          setProducts([...Products, response.data.products]);
+        } else {
+          setProducts([response.data.products]);
+        }
         //   spread operator to bring in the first 8 plus the next 8 products
-        setProducts([...Products, response.data.products]);
+
         setPostSize(response.data.postSize);
         console.log(response.data.products);
       } else {
@@ -45,7 +50,8 @@ function LandingPage() {
     let skip = Skip + Limit;
     const variables = {
       skip: skip,
-      limit: Limit
+      limit: Limit,
+      loadMore: true
     };
     getProducts(variables);
     setSkip(skip);
