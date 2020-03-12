@@ -19,6 +19,7 @@ function UploadProductPage(props) {
   const [DescriptionValue, setDescriptionValue] = useState('');
   const [PriceValue, setPriceValue] = useState(0);
   const [LocationValue, setLocationValue] = useState(1);
+
   const [Images, setImages] = useState([]);
 
   const onTitleChange = event => {
@@ -38,10 +39,8 @@ function UploadProductPage(props) {
   };
 
   const updateImages = newImages => {
-    console.log(newImages);
     setImages(newImages);
   };
-
   const onSubmit = event => {
     event.preventDefault();
 
@@ -52,7 +51,7 @@ function UploadProductPage(props) {
       !LocationValue ||
       !Images
     ) {
-      return alert('fill all the fields before submitting');
+      return alert('fill all the fields first!');
     }
 
     const variables = {
@@ -63,12 +62,13 @@ function UploadProductPage(props) {
       images: Images,
       locations: LocationValue
     };
+
     Axios.post('/api/product/uploadProduct', variables).then(response => {
       if (response.data.success) {
-        alert('Product Successfully uploaded');
+        alert('Product Successfully Uploaded');
         props.history.push('/');
       } else {
-        alert('Failed to Upload Product');
+        alert('Failed to upload Product');
       }
     });
   };
@@ -76,40 +76,34 @@ function UploadProductPage(props) {
   return (
     <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <Title level={2}>Upload Vehicle Pictures</Title>
+        <Title level={2}> Upload Product</Title>
       </div>
 
       <Form onSubmit={onSubmit}>
+        {/* DropZone */}
         <FileUpload refreshFunction={updateImages} />
-        <br />
-        <br />
 
-        <label>Title:</label>
+        <br />
+        <br />
+        <label>Title</label>
         <Input onChange={onTitleChange} value={TitleValue} />
-
         <br />
         <br />
-
-        <label>Description:</label>
+        <label>Description</label>
         <TextArea onChange={onDescriptionChange} value={DescriptionValue} />
-
         <br />
         <br />
-
-        <label>Price($):</label>
+        <label>Price($)</label>
         <Input onChange={onPriceChange} value={PriceValue} type="number" />
-
         <br />
         <br />
-
         <select onChange={onLocationsSelectChange}>
           {Locations.map(item => (
             <option key={item.key} value={item.key}>
-              {item.value}
+              {item.value}{' '}
             </option>
           ))}
         </select>
-
         <br />
         <br />
 

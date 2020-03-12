@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { Icon } from 'antd';
 import Axios from 'axios';
-
 function FileUpload(props) {
   const [Images, setImages] = useState([]);
 
@@ -35,7 +34,7 @@ function FileUpload(props) {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Dropzone onDrop={onDrop} multiple={false} maxSize={80000000}>
+      <Dropzone onDrop={onDrop} multiple={false} maxSize={800000000}>
         {({ getRootProps, getInputProps }) => (
           <div
             style={{

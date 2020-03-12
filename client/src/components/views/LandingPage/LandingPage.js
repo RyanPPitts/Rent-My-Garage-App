@@ -40,7 +40,7 @@ function LandingPage() {
         if (variables.loadMore) {
           setProducts([...Products, response.data.products]);
         } else {
-          setProducts([response.data.products]);
+          setProducts(response.data.products);
         }
         //   spread operator to bring in the first 8 plus the next 8 products
 
@@ -178,14 +178,11 @@ function LandingPage() {
             alignItems: 'center'
           }}
         >
-          <h2> No cars listed yet</h2>
+          <h2>No post yet...</h2>
         </div>
       ) : (
         <div>
-          <Row gutter={[16, 16]}>
-            {renderCards}
-            })>
-          </Row>
+          <Row gutter={[16, 16]}>{renderCards}</Row>
         </div>
       )}
       <br />
