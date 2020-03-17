@@ -9,6 +9,7 @@ import NavBar from './views/NavBar/NavBar';
 import Footer from './views/Footer/Footer';
 import UploadProductPage from './views/UploadProductPage/UploadProductPage';
 import DetailProductPage from './views/DetailProductPage/DetailProductPage';
+import CartPage from './views/CartPage/CartPage';
 import { Upload } from 'antd';
 
 function App() {
@@ -29,6 +30,11 @@ function App() {
             exact
             path="/product/:productId"
             component={Auth(DetailProductPage, null)}
+          />
+          <Route
+            exact
+            path="/product/:productId"
+            component={Auth(CartPage, true)}
           />
         </Switch>
       </div>

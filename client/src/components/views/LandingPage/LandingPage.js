@@ -17,7 +17,7 @@ function LandingPage() {
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
   const [SearchTerms, setSearchTerms] = useState('');
-  const [PostSize, setPostSize] = useState(0);
+  const [PostSize, setPostSize] = useState();
   const [Filters, setFilters] = useState({
     locations: [],
     price: []

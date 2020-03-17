@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Button, Form, message, Input, Icon } from 'antd';
+import { Typography, Button, Form, Message, Input, Icon } from 'antd';
 import FileUpload from '../../utils/FileUpload';
 import Axios from 'axios';
 
@@ -100,7 +100,7 @@ function UploadProductPage(props) {
         <select onChange={onLocationsSelectChange}>
           {Locations.map(item => (
             <option key={item.key} value={item.key}>
-              {item.value}{' '}
+              {item.value}
             </option>
           ))}
         </select>
