@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCartItems } from '../../../_actions/user_actions';
 import UserCardBlock from './Sections/UserCardBlock';
-import { Result } from 'antd';
+import { Result, Empty } from 'antd';
 
 function CartPage(props) {
   const dispatch = useDispatch();
@@ -22,20 +22,26 @@ function CartPage(props) {
     <div style={{ width: '85%', margin: '3rem auto' }}>
       <h1>My Cart</h1>
       <div>
-        <UserCardBlock />
+        <UserCardBlock products={props.user.cartDetail} />
 
         <div style={{ marginTop: '3rem' }}>
-          <h2>Total amount: ${Total} </h2>
+          <h2>Total amount: $ </h2>
         </div>
 
-        <Result status="success"
-        title="Successfully purchased Car"
-        />
+        <Result status="success" title="Successfully purchased Car" />
 
-        <div style={{width: 100%, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-          
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center'
+          }}
+        >
+          <br />
+          <Empty description={false} />
+          <p>No Items In The Cart</p>
         </div>
-
       </div>
     </div>
   );
