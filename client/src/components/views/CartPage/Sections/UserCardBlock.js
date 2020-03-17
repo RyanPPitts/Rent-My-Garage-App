@@ -12,7 +12,7 @@ function UserCardBlock() {
             <th>Remove from Cart</th>
           </tr>
         </thead>
-        <tbody>{renderItems()}</tbody>
+        {/* <tbody>{renderItems()}</tbody> */}
       </table>
     </div>
   );
