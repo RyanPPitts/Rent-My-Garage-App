@@ -70,7 +70,6 @@ function LandingPage() {
           hoverable={true}
           cover={
             <a href={`/product/${product._id}`}>
-              {' '}
               <ImageSlider images={product.images} />
             </a>
           }
