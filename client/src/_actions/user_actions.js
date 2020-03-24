@@ -83,3 +83,20 @@ export function getCartItems(cartItems, userCart) {
     payload: request
   };
 }
+
+export function removeCartItem(id) {
+  const request = axios
+    .get(`/api/users/removeFromCart?_id=${id}`)
+    .then(response => {
+      response.data.cart.forEach(item => {
+        response.data.cartDetail;
+      });
+
+      return response.data;
+    });
+
+  return {
+    type: GET_CART_ITEMS_USER,
+    payload: request
+  };
+}
