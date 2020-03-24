@@ -7,6 +7,8 @@ import { Result, Empty } from 'antd';
 function CartPage(props) {
   const dispatch = useDispatch();
   const [Total, setTotal] = useState(0);
+  const [ShowTotal, setShowTotal] = useState(false);
+  const [ShowSuccess, setShowSuccess] = useState(true);
 
   useEffect(() => {
     let cartItems = [];
@@ -32,10 +34,17 @@ function CartPage(props) {
       total += parseInt(item.price, 10) * item.quantity;
     });
     setTotal(total);
+    setShowTotal(true);
   };
 
   const removeFromCart = productId => {
-    dispatch(removeCartItem(productId)).then;
+    dispatch(removeCartItem(productId)).then(() => {
+      if (props.user.cartDetail.length <= 0) {
+        setShowTotal(false);
+      } else {
+        calculateTotal(props.user.cartDetail);
+      }
+    });
   };
 
   return (
@@ -47,24 +56,26 @@ function CartPage(props) {
           removeItem={removeFromCart}
         />
 
-        <div style={{ marginTop: '3rem' }}>
-          <h2>Total amount: ${Total} </h2>
-        </div>
-
-        <Result status="success" title="Successfully purchased Car" />
-
-        <div
-          style={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center'
-          }}
-        >
-          <br />
-          <Empty description={false} />
-          <p>No Items In The Cart</p>
-        </div>
+        {ShowTotal ? (
+          <div style={{ marginTop: '3rem' }}>
+            <h2>Total amount: ${Total} </h2>
+          </div>
+        ) : ShowSuccess ? (
+          <Result status="success" title="Successfully purchased Car" />
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center'
+            }}
+          >
+            <br />
+            <Empty description={false} />
+            <p>No Items In The Cart</p>
+          </div>
+        )}
       </div>
     </div>
   );
