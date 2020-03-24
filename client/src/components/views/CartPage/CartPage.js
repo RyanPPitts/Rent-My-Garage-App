@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCartItems } from '../../../_actions/user_actions';
 import UserCardBlock from './Sections/UserCardBlock';
@@ -6,6 +6,8 @@ import { Result, Empty } from 'antd';
 
 function CartPage(props) {
   const dispatch = useDispatch();
+  const [Total, setTotal] = useState(0);
+
   useEffect(() => {
     let cartItems = [];
     if (props.user.userData && props.user.userData.cart) {
@@ -18,6 +20,20 @@ function CartPage(props) {
     }
   }, [props.user.userData]);
 
+  useEffect(() => {
+    if (props.user.cartDetail && props.user.cartDetail.length > 0) {
+      calculateTotal(props.user.cartDetail);
+    }
+  }, [props.user.cartDetail]);
+
+  const calculateTotal = cartDetail => {
+    let total = 0;
+    cartDetail.map(item => {
+      total += parseInt(item.price, 10) * item.quantity;
+    });
+    setTotal(total);
+  };
+
   return (
     <div style={{ width: '85%', margin: '3rem auto' }}>
       <h1>My Cart</h1>
@@ -25,7 +41,7 @@ function CartPage(props) {
         <UserCardBlock products={props.user.cartDetail} />
 
         <div style={{ marginTop: '3rem' }}>
-          <h2>Total amount: $ </h2>
+          <h2>Total amount: ${Total} </h2>
         </div>
 
         <Result status="success" title="Successfully purchased Car" />
