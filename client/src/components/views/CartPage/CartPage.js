@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getCartItems, removeCartITem } from '../../../_actions/user_actions';
+import { getCartItems, removeCartItem } from '../../../_actions/user_actions';
 import UserCardBlock from './Sections/UserCardBlock';
 import { Result, Empty } from 'antd';
 
@@ -35,7 +35,7 @@ function CartPage(props) {
   };
 
   const removeFromCart = productId => {
-    dispatch(removeCartITem(productId)).then;
+    dispatch(removeCartItem(productId)).then;
   };
 
   return (
