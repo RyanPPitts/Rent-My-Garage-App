@@ -18,8 +18,8 @@ router.get('/auth', auth, (req, res) => {
     lastname: req.user.lastname,
     role: req.user.role,
     image: req.user.image,
-    cart: req.user.cart,
-    history: req.user.history
+    cart: req.user.cart
+    // history: req.user.history
   });
 });
 
@@ -143,21 +143,18 @@ router.get('/removeFromCart', auth, (req, res) => {
 });
 
 router.get('/userCartInfo', auth, (req, res) => {
-  User.findOne(
-    {_id: req.user._id},
-  (err, userInfo) => {
+  User.findOne({ _id: req.user._id }, (err, userInfo) => {
     let cart = userInfo.cart;
     let array = cart.map(item => {
-      return item.id
-    })
-    Product.find({'._id': { $in: array}})
-    .populate('writer')
-    .exec((err, cartDetail) => {
-      if(err) return res.status(400).send(err);
-      return res.status(200).json({ success: true, cartDetail, cart})
-    })
-  }
-  )
-}
+      return item.id;
+    });
+    Product.find({ '._id': { $in: array } })
+      .populate('writer')
+      .exec((err, cartDetail) => {
+        if (err) return res.status(400).send(err);
+        return res.status(200).json({ success: true, cartDetail, cart });
+      });
+  });
+});
 
 module.exports = router;

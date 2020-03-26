@@ -40,8 +40,6 @@ router.post('/uploadImage', auth, (req, res) => {
 });
 
 router.post('/uploadProduct', auth, (req, res) => {
-  //save all the data we got from the user to the Mongo DB
-  // req.body has all the data from the front end.
   const product = new Product(req.body);
   product.save(err => {
     if (err) return res.status(400).json({ success: false, err });
