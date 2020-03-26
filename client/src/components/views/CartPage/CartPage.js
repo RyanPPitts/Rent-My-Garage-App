@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getCartItems, removeCartItem } from '../../../_actions/user_actions';
 import UserCardBlock from './Sections/UserCardBlock';
 import { Result, Empty } from 'antd';
+import Axios from 'axios';
 
 function CartPage(props) {
   const dispatch = useDispatch();
@@ -39,11 +40,17 @@ function CartPage(props) {
 
   const removeFromCart = productId => {
     dispatch(removeCartItem(productId)).then(() => {
-      if (props.user.cartDetail.length <= 0) {
-        setShowTotal(false);
-      } else {
-        calculateTotal(props.user.cartDetail);
-      }
+      Axios.get('/api/users/userCartInfo').then(response => {
+        if (response.data.success) {
+          if (response.data.cartDetail.length <= 0) {
+            setShowTotal(false);
+          } else {
+            calculateTotal(response.data.cartDetail);
+          }
+        } else {
+          alert('Failed to get cart info');
+        }
+      });
     });
   };
 
