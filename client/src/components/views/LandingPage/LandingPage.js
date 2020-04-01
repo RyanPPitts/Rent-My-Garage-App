@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-// import { FaCode, FaCreditCard } from 'react-icons/fa';
 import Axios from 'axios';
-import { Col, Card, Row } from 'antd';
-
+import { Icon, Col, Card, Row } from 'antd';
 import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
 import RadioBox from './Sections/RadioBox';
-import SearchFeature from './Sections/SearchFeature';
 import { locations, price } from './Sections/Datas';
+import SearchFeature from './Sections/SearchFeature';
 
 const { Meta } = Card;
 
@@ -16,8 +14,8 @@ function LandingPage() {
   const [Products, setProducts] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
-  const [SearchTerms, setSearchTerms] = useState('');
   const [PostSize, setPostSize] = useState();
+  const [SearchTerms, setSearchTerms] = useState('');
   const [Filters, setFilters] = useState({
     locations: [],
     price: []
@@ -186,7 +184,6 @@ function LandingPage() {
       )}
       <br />
       <br />
-
       {PostSize >= Limit && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <button onClick={onLoadMore}>Load More</button>
