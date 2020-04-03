@@ -135,7 +135,7 @@ function LandingPage() {
   return (
     <div style={{ width: '80%', margin: '3rem auto' }}>
       <div style={{ textAlign: 'center' }}>
-        <h2>Want a cool car?</h2>
+        <h2>Metropolitan Survival Store</h2>
       </div>
 
       {/* filter */}

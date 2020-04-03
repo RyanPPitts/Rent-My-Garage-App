@@ -10,7 +10,7 @@ function CartPage(props) {
 
   const [Total, setTotal] = useState(0);
   const [ShowTotal, setShowTotal] = useState(false);
-  const [ShowSuccess, setShowSuccess] = useState(true);
+  const [ShowSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     let cartItems = [];
@@ -71,7 +71,7 @@ function CartPage(props) {
             <h2>Total amount: ${Total} </h2>
           </div>
         ) : ShowSuccess ? (
-          <Result status="success" title="Successfully purchased Car" />
+          <Result status="success" title="Successfully Purchased Items" />
         ) : (
           <div
             style={{
@@ -83,7 +83,7 @@ function CartPage(props) {
           >
             <br />
             <Empty description={false} />
-            <p>No Items In The Cart</p>
+            <p>No Items In the Cart</p>
           </div>
         )}
       </div>

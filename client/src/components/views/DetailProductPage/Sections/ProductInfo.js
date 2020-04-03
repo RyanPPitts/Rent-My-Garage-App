@@ -19,7 +19,6 @@ function ProductInfo(props) {
         <Descriptions.Item label="Sold">{Product.sold}</Descriptions.Item>
         <Descriptions.Item label="View"> {Product.views}</Descriptions.Item>
         <Descriptions.Item label="Description">
-          {' '}
           {Product.description}
         </Descriptions.Item>
       </Descriptions>
