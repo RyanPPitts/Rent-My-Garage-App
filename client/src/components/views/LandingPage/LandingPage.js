@@ -18,7 +18,7 @@ function LandingPage() {
   const [SearchTerms, setSearchTerms] = useState('');
   const [Filters, setFilters] = useState({
     locations: [],
-    price: []
+    price: [],
   });
 
   // When more than 8 posts shows show load more button.  Less than 8 items no load more button.
@@ -27,13 +27,13 @@ function LandingPage() {
     // get information from the MongoDB for the landing page
     const variables = {
       skip: Skip,
-      limit: Limit
+      limit: Limit,
     };
     getProducts(variables);
   }, []);
 
-  const getProducts = variables => {
-    Axios.post('/api/product/getProducts', variables).then(response => {
+  const getProducts = (variables) => {
+    Axios.post('/api/product/getProducts', variables).then((response) => {
       if (response.data.success) {
         if (variables.loadMore) {
           setProducts([...Products, response.data.products]);
@@ -55,7 +55,7 @@ function LandingPage() {
     const variables = {
       skip: skip,
       limit: Limit,
-      loadMore: true
+      loadMore: true,
     };
     getProducts(variables);
     setSkip(skip);
@@ -63,7 +63,7 @@ function LandingPage() {
 
   const renderCards = Products.map((product, index) => {
     return (
-      <Col lg={6} md={8} xs={24}>
+      <Col lg={4} md={8} xs={12}>
         <Card
           hoverable={true}
           cover={
@@ -78,18 +78,18 @@ function LandingPage() {
     );
   });
 
-  const showFilteredResults = filters => {
+  const showFilteredResults = (filters) => {
     const variables = {
       skip: 0,
       limit: Limit,
-      filters: filters
+      filters: filters,
     };
 
     getProducts(variables);
     setSkip(0);
   };
 
-  const handlePrice = value => {
+  const handlePrice = (value) => {
     const data = price;
     let array = [];
     for (let key in data) {
@@ -116,7 +116,7 @@ function LandingPage() {
     setFilters(newFilters);
   };
 
-  const updateSearchTerms = newSearchTerm => {
+  const updateSearchTerms = (newSearchTerm) => {
     setSearchTerms(newSearchTerm);
     console.log(newSearchTerm);
 
@@ -124,7 +124,7 @@ function LandingPage() {
       skip: 0,
       limit: Limit,
       filters: Filters,
-      searchTerm: newSearchTerm
+      searchTerm: newSearchTerm,
     };
 
     setSkip(0);
@@ -135,7 +135,11 @@ function LandingPage() {
   return (
     <div style={{ width: '80%', margin: '3rem auto' }}>
       <div style={{ textAlign: 'center' }}>
-        <h2>Metropolitan Survival Store</h2>
+        <h2>Metropolitan Survival Marketplace</h2>
+        <h4>
+          Marketplace for "preppers" that need to unload $18K worth of hand
+          sanitizer{' '}
+        </h4>
       </div>
 
       {/* filter */}
@@ -144,13 +148,13 @@ function LandingPage() {
         <Col lg={12} xs={24}>
           <CheckBox
             list={locations}
-            handleFilters={filters => handleFilters(filters, 'locations')}
+            handleFilters={(filters) => handleFilters(filters, 'locations')}
           />
         </Col>
         <Col lg={12} xs={24}>
           <RadioBox
             list={price}
-            handleFilters={filters => handleFilters(filters, 'price')}
+            handleFilters={(filters) => handleFilters(filters, 'price')}
           />
         </Col>
       </Row>
@@ -160,7 +164,7 @@ function LandingPage() {
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
-          margin: '1rem auto'
+          margin: '1rem auto',
         }}
       >
         <SearchFeature refreshFunction={updateSearchTerms} />
@@ -170,16 +174,16 @@ function LandingPage() {
         <div
           style={{
             display: 'flex',
-            height: '300px',
+            height: '500px',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
           }}
         >
           <h2>No post yet...</h2>
         </div>
       ) : (
         <div>
-          <Row gutter={[16, 16]}>{renderCards}</Row>
+          <Row gutter={[12, 12]}>{renderCards}</Row>
         </div>
       )}
       <br />
