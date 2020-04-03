@@ -7,6 +7,7 @@ import Axios from 'axios';
 
 function CartPage(props) {
   const dispatch = useDispatch();
+
   const [Total, setTotal] = useState(0);
   const [ShowTotal, setShowTotal] = useState(false);
   const [ShowSuccess, setShowSuccess] = useState(true);
@@ -15,7 +16,7 @@ function CartPage(props) {
     let cartItems = [];
     if (props.user.userData && props.user.userData.cart) {
       if (props.user.userData.cart.length > 0) {
-        props.user.user.userData.cart.forEach(item => {
+        props.user.userData.cart.forEach(item => {
           cartItems.push(item.id);
         });
         dispatch(getCartItems(cartItems, props.user.userData.cart));
