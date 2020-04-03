@@ -34,7 +34,7 @@ function ProductInfo(props) {
           type="danger"
           onClick={addToCarthandler}
         >
-          Schedule Test Drive
+          Add to Cart
         </Button>
       </div>
     </div>

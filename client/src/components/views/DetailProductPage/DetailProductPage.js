@@ -26,7 +26,8 @@ function DetailProductPage(props) {
   return (
     <div className="postPage" style={{ width: '100%', padding: '3rem 4rem' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <h1>{Product.title}</h1>
+        <h1>Product Title : </h1>
+        {/* <h1> Product Title {Product.title}</h1> */}
       </div>
 
       <br />
